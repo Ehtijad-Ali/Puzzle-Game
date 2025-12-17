@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brain Trainer Pro</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="app-container">
+        <header class="main-header">
+            <h1>Brain Trainer Pro</h1>
+        </header>
+
+        <main class="game-wrapper">
+            <div class="game-container">
+                <div class="mode-switcher">
+                    <button class="mode-btn active" data-mode="logic">Logic Puzzle</button>
+                    <button class="mode-btn" data-mode="image">Image Puzzle</button>
+                </div>
+
+                <!-- Logic Puzzle Mode -->
+                <section id="logic-mode" class="game-mode active">
+                    <div class="controls-section">
+                        <div class="difficulty-selector">
+                            <button class="difficulty-btn active" data-level="easy">Easy</button>
+                            <button class="difficulty-btn" data-level="medium">Medium</button>
+                            <button class="difficulty-btn" data-level="hard">Hard</button>
+                        </div>
+                        <div class="game-stats">
+                            <div class="stat">
+                                <span class="stat-label">Time</span>
+                                <span id="timer" class="stat-value">00:00</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Errors</span>
+                                <span id="errors" class="stat-value">0</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="sudoku-board" class="puzzle-board"></div>
+                    
+                    <div class="controls-section">
+                        <div class="number-pad">
+                            <button class="number-btn" data-number="1">1</button>
+                            <button class="number-btn" data-number="2">2</button>
+                            <button class="number-btn" data-number="3">3</button>
+                            <button class="number-btn" data-number="4">4</button>
+                        </div>
+                        <div class="control-buttons">
+                            <button class="control-btn new-game" title="New Game">
+                                <svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>
+                            </button>
+                            <button class="control-btn hint" title="Hint">
+                                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg>
+                            </button>
+                            <button class="control-btn clear" title="Clear">
+                                <svg viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Image Puzzle Mode -->
+                <section id="image-mode" class="game-mode">
+                    <div class="controls-section">
+                        <div class="image-upload-wrapper">
+                            <label for="image-upload" class="upload-btn">
+                                <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                <span>Upload Image</span>
+                                <input type="file" id="image-upload" accept="image/*">
+                            </label>
+                        </div>
+                        <div class="game-stats">
+                            <div class="stat">
+                                <span class="stat-label">Time</span>
+                                <span id="image-timer" class="stat-value">00:00</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Moves</span>
+                                <span id="moves" class="stat-value">0</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="image-board" class="puzzle-board">
+                        <div class="loading-spinner"></div>
+                    </div>
+                    
+                    <div class="controls-section">
+                        <div class="control-buttons">
+                            <button class="control-btn new-game" id="new-image-game" title="Shuffle">
+                                <svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>
+                                <span>Shuffle</span>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <footer class="message-footer">
+                    <p id="message-area"></p>
+                </footer>
+            </div>
+        </main>
+    </div>
+
+    <!-- Game Summary Modal -->
+    <div id="summary-modal" class="summary-modal">
+        <div class="summary-content">
+            <h2>Puzzle Solved!</h2>
+            <p>Your Time: <span id="summary-time"></span></p>
+            <p id="summary-stat-label">Total Errors: <span id="summary-stat-value"></span></p>
+            <p>Difficulty: <span id="summary-difficulty"></span></p>
+            <button class="control-btn new-game" onclick="closeSummaryModal()">Play Again</button>
+        </div>
+    </div>
+
+    <script src="script.js" defer></script>
+</body>
+</html>
