@@ -1,16 +1,8 @@
-
-
-Of course! Here is a comprehensive `README.md` file for your Brain Trainer Pro project. This file explains the project, its features, how to set it up, and how to play.
-
-You can save this content as `README.md` in the root of your project folder.
-
----
-
 # Brain Trainer Pro
 
 A modern, responsive, and feature-rich web application designed for cognitive training and entertainment. Brain Trainer Pro offers two engaging puzzle modes: a classic Logic Puzzle (Mini Sudoku) and a customizable Image Slider Puzzle.
 
-![Game Preview](https://i.imgur.com/example-preview.png) <!-- You can replace this with an actual screenshot of your game -->
+
 
 ## Table of Contents
 
